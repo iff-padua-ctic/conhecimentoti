@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+
+kind: IngressRoute
+
+metadata:
+  name: ingress-app-conhecimentoti-padua
+
+spec:
+  #EndPoint
+  entryPoints:
+    - websecure
+  
+  routes:
+  - match: Host(`conhecimentoti.padua.iff.edu.br`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: service-conhecimentoti-padua
+      port: 80
+
+  tls:
+    secretName: cer-conhecimentoti-padua
+
+      
+
+#https://doc.traefik.io/traefik/v2.1/routing/providers/kubernetes-crd/#server-load-balancing
